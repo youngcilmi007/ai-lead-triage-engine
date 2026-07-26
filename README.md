@@ -21,7 +21,28 @@ This workflow creates an autonomous triage loop:
 ## 🧱 Workflow Architecture
 
 ```text
-[Lead Form/Webhook] ➔ [Zapier Core Logic] ➔ [AI Enrichment Agent] 
+[Lead Form/Weai-lead-triage-engine Zapier Pipeline
+Trigger Step: GitHub — New Commit or New Push
+
+Repository: youngcilmi007/ai-lead-triage-engine
+
+Branch: main
+
+Action Step: Google Sheets — Create Spreadsheet Row
+
+Spreadsheet: fc lion (or your Lead Automation Log)
+
+Row Mappings:
+
+Commit Reference: Map to GitHub Commit ID / Hash
+
+Lead / Component Title: Map to Commit Message
+
+Triage Status: Set to Processed or Synced
+
+Generation Date: Map to Zapier Execution Timestamp ({{zap_meta_human_now}})
+
+GitHub Asset URL: Map to Commit URLbhook] ➔ [Zapier Core Logic] ➔ [AI Enrichment Agent] 
                                                         │
          ┌──────────────────────────────────────────────┘
          ▼

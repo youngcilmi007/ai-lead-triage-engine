@@ -1,0 +1,29 @@
+name: Manual AI Lead Triage Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      log_level:
+        description: 'Log level for triage execution'
+        required: true
+        default: 'info'
+        type: choice
+        options:
+          - info
+          - debug
+          - warning
+
+jobs:
+  run-triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Environment
+        run: echo "Triggering Manual AI Lead Triage Engine execution..."
+
+      - name: Run Triage Pipeline Script
+        run: |
+          # Add your execution command here (e.g., calling your python script or webhooks)
+          echo "Processing inbound lead payloads and syncing with Notion CRM / Google Sheets..."

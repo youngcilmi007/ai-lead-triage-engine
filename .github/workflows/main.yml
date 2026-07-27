@@ -12,26 +12,6 @@ on:
           - info
           - debug
           - warning
-
-jobs:
-  run-triage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set up Environment
-        run: echo "Triggering Manual AI Lead Triage Engine execution..."
-
-      - name: Run Triage Pipeline Script
-        run: |
-          # Add your execution command here (e.g., calling your python script or webhooks)
-          echo "Processing inbound lead payloads and syncing with Notion CRM / Google Sheets..."
-name: Manual AI Lead Triage Trigger
-
-on:
-  workflow_dispatch:
-    inputs:
       lead_name:
         description: 'Lead Name'
         required: true
@@ -53,8 +33,8 @@ jobs:
           curl -X POST "${{ secrets.ZAPIER_WEBHOOK_URL }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "timestamp": "'$(date -u +"Y-m-d H:M:S")'",
+            "timestamp": "'$(date -u +"%Y-%m-%d %H:%M:%S")'",
+            "log_level": "${{ github.event.inputs.log_level }}",
             "lead_name": "${{ github.event.inputs.lead_name }}",
             "status": "${{ github.event.inputs.status_detail }}"
           }'
-
